@@ -51,7 +51,7 @@ int main() {
                 << ":WR=" << timing.WR << ":nbkgrp=" << timing.nbkgrp
                 << ":CCDL=" << timing.CCDL << ":RTPL=" << timing.RTPL
                 << std::endl;
-    } else {
+    } else if (DRAM_MODEL == dram_model::GDDR5) {
       // use GDDR timing
       DDR_Timing timing = GDDR5_Timing_1800MHZ;
       timing.scale_timing_for_new_freq(device_freq_MHZ);
@@ -65,8 +65,35 @@ int main() {
                 << ":WR=" << timing.WR << ":nbkgrp=" << timing.nbkgrp
                 << ":CCDL=" << timing.CCDL << ":RTPL=" << timing.RTPL
                 << std::endl;
+    }else if (DRAM_MODEL == dram_model::LPDDR4) {
+      // use LPDDR timing
+      DDR_Timing timing = LPDDR4_Timing_1600MHZ;
+      timing.scale_timing_for_new_freq(device_freq_MHZ);
+      std::cout << "-dram_dual_bus_interface 0" << std::endl;
+      std::cout << "-gpgpu_dram_timing_opt nbk=" << timing.nbk
+                << ":CCD=" << get_adjusted_CCD(DRAM_MODEL)
+                << ":RRD=" << timing.RRD << ":RCD=" << timing.RCD
+                << ":RAS=" << timing.RAS << ":RP=" << timing.RP
+                << ":RC=" << timing.RC << ":CL=" << timing.CL
+                << ":WL=" << timing.WL << ":CDLR=" << timing.CDLR
+                << ":WR=" << timing.WR << ":nbkgrp=" << timing.nbkgrp
+                << ":CCDL=" << timing.CCDL << ":RTPL=" << timing.RTPL
+                << std::endl;
+    }else if (DRAM_MODEL == dram_model::LPDDR5) {
+      // use LPDDR timing
+      DDR_Timing timing = LPDDR5_Timing_3200MHZ;
+      timing.scale_timing_for_new_freq(device_freq_MHZ);
+      std::cout << "-dram_dual_bus_interface 0" << std::endl;
+      std::cout << "-gpgpu_dram_timing_opt nbk=" << timing.nbk
+                << ":CCD=" << get_adjusted_CCD(DRAM_MODEL)
+                << ":RRD=" << timing.RRD << ":RCD=" << timing.RCD
+                << ":RAS=" << timing.RAS << ":RP=" << timing.RP
+                << ":RC=" << timing.RC << ":CL=" << timing.CL
+                << ":WL=" << timing.WL << ":CDLR=" << timing.CDLR
+                << ":WR=" << timing.WR << ":nbkgrp=" << timing.nbkgrp
+                << ":CCDL=" << timing.CCDL << ":RTPL=" << timing.RTPL
+                << std::endl;
     }
-
     // leave the adddress mapping for now as it is
     // the number of banks in HBM and GDDR are 16 and atom size is 32B, so the
     // mapping should be okay. TODO: make this to be varibale based on memory
