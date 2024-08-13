@@ -12,6 +12,8 @@ config_maps = {
     "GV100": set("Quadro GV100"),
     "RTX2060": set("GeForce RTX 2060"),
     "RTX3070": set("GeForce RTX 3070"),
+    "XAVIER" : set("Jetson AGX XAVIER"),
+    "ORIN" : set("Jetson AGX Orin"),
 }
 
 
