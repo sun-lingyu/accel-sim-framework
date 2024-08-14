@@ -79,7 +79,7 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     # Make sure CUDA_INSTALL_PATH is set, and PATH includes nvcc
 
     # Get the applications, their data files and build them:
-    git clone https://github.com/accel-sim/gpu-app-collection
+    git clone https://github.com/sun-lingyu/gpu-app-collection
     source ./gpu-app-collection/src/setup_environment
     make -j -C ./gpu-app-collection/src rodinia_2.0-ft
     make -C ./gpu-app-collection/src data
@@ -106,6 +106,8 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     ```bash
     pip3 install -r requirements.txt
     source ./gpu-simulator/setup_environment.sh
+    sudo chmod +x ./gpu-simulator/my_accelsim_install_dependency.sh
+    sudo ./gpu-simulator/my_accelsim_install_dependency.sh
     make -j -C ./gpu-simulator/
     ```
     This will produce an executable in:
@@ -115,7 +117,7 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
 
     *Running the simple example from bullet 1*
     ```bash
-    ./util/job_launching/run_simulations.py -B rodinia_2.0-ft -C QV100-SASS -T ./hw_run/traces/device-<device-num>/<cuda-version>/ -N myTest
+    ./util/job_launching/run_simulations.py -B rodinia_2.0-ft -C ORIN-SASS -T ./hw_run/traces/device-<device-num>/<cuda-version>/ -N myTest
     ```
     The above command will run the workloads in Accel-Sim's SASS traces-driven mode. You can also run the workloads in PTX mode using:
     ```txt
@@ -141,7 +143,7 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
 
     If you want to run the accel-sim.out executable command itself for specific workload, you can use:
     ```bash
-    /gpu-simulator/bin/release/accel-sim.out -trace ./hw_run/rodinia_2.0-ft/9.1/backprop-rodinia-2.0-ft/4096___data_result_4096_txt/traces/kernelslist.g -config ./gpu-simulator/gpgpu-sim/configs/tested-cfgs/SM7_QV100/gpgpusim.config -config ./gpu-simulator/configs/tested-cfgs/SM7_QV100/trace.config
+    /gpu-simulator/bin/release/accel-sim.out -trace ./hw_run/rodinia_2.0-ft/9.1/backprop-rodinia-2.0-ft/4096___data_result_4096_txt/traces/kernelslist.g -config ./gpu-simulator/gpgpu-sim/configs/tested-cfgs/SM87_ORIN/gpgpusim.config -config ./gpu-simulator/configs/tested-cfgs/SM87_ORIN/trace.config
     ```
     However, we encourage you to use our workload launch manager 'run_simulations' script as shown above, which will greatly simplify the simulation process and increase productivity.
 
@@ -153,17 +155,17 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
 For example, to generate the profiler numbers for the short-running apps in our running example, do the following:
 Note that this step assumes you have already built the apps using the instructions from (1).
 ```bash
-./util/hw_stats/run_hw.py -B rodinia_2.0-ft
+./util/hw_stats/run_hw.py -B rodinia_2.0-ft  -C other_stats
 ```
 
 Note: Different cards support different profilers. By default - this script will use nvprof. However, you can use nsight-cli instead using:
 ```bash
-./util/hw_stats/run_hw.py -B rodinia_2.0-ft --nsight_profiler --disable_nvprof
+./util/hw_stats/run_hw.py -B rodinia_2.0-ft --nsight_profiler --disable_nvprof  -C other_stats
 ```
 
 All the stats will be output in:
 ```bash
-./hw_run/...
+./hw_run/device-0
 ```
 
 Note - that in order to correlate our running example with your local machine - you need to have a QV100 card.
@@ -175,12 +177,12 @@ However - we also provide a comprehensive suite of hardware profiling results, w
 Now you can use the statistics from the simulation run you did in (2) to correlate with these results.
 To generate stats that can be correlated - do the following:
 ```bash
-./util/job_launching/get_stats.py -R -k -K -B rodinia_2.0-ft -C QV100-SASS | tee per.kernel.stats.csv
+./util/job_launching/get_stats.py -R -k -K -B rodinia_2.0-ft -C ORIN-SASS | tee per.kernel.stats.csv
 ```
 
 To run the correlator - do the following:
 ```
-./util/plotting/plot-correlation.py -c per.kernel.stats.csv -H ./hw_run/QUADRO-V100/device-0/9.1/
+./util/plotting/plot-correlation.py -c per.kernel.stats.csv -H ./hw_run/device-0/11.4/ -v
 ```
 
 The script may take a few minutes to run (primarily because it is parsing a large amount of hardware data for >150 apps).
@@ -196,11 +198,11 @@ For a true validation, you should attempt correlating the fully-scaled set of ap
 **These will take hours to run (even on a cluster), and some consume significant memory**, but can be run using:
 
 ```bash
-./util/job_launching/run_simulations.py -B rodinia-3.1,GPU_Microbenchmark,sdk-4.2-scaled,parboil,polybench,cutlass_5_trace,Deepbench_nvidia -C QV100-SASS -T ~/../common/accel-sim/traces/tesla-v100/latest/ -N all-apps -M 70G
+./util/job_launching/run_simulations.py -B rodinia-3.1,GPU_Microbenchmark,sdk-4.2-scaled,parboil,polybench,cutlass_5_trace,Deepbench_nvidia -C ORIN-SASS -T ~/../common/accel-sim/traces/orin/latest/ -N all-apps -M 70G
 
 # Once complete, collect the stats and plot
 ./util/job_launching/get_stats.py -k -K -R -N all-apps | tee all-apps.csv
-./util/plotting/plot-correlation.py -c all-apps.csv -H ./hw_run/QUADRO-V100/device-0/9.1/
+./util/plotting/plot-correlation.py -c all-apps.csv -H ./hw_run/device-0/11.4/
 ```
 
 

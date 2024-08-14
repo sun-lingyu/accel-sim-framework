@@ -80,3 +80,6 @@ echo "Using GPGPU-Sim in $GPGPUSIM_ROOT"
 
 echo "Accel-Sim setup succeeded."
 export ACCELSIM_SETUP_ENVIRONMENT_WAS_RUN=1
+
+# added for slurm
+export TORQUE_QUEUE_NAME=sail3090
