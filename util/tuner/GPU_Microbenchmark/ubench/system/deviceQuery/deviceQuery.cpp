@@ -80,8 +80,13 @@ int main(int argc, char **argv) {
              "  Global memory size                        : %.0f GB\n",
              static_cast<float>(deviceProp.totalGlobalMem / 1073741824.0f));
     printf("%s", msg);
-    printf("  Memory Clock rate                           : %.0f Mhz\n",
-           deviceProp.memoryClockRate * 1e-3f);
+    if (strcmp(deviceProp.name, "Orin") == 0)
+       printf("  Memory Clock rate                           : 3200 Mhz\n");
+    else if (strcmp(deviceProp.name, "Xavier") == 0)
+       printf("  Memory Clock rate                           : 2133 Mhz\n");
+    else
+       printf("  Memory Clock rate                           : %.0f Mhz\n",
+              deviceProp.memoryClockRate * 1e-3f);
     printf("  Memory Bus Width                            : %d bit\n",
            deviceProp.memoryBusWidth);
 

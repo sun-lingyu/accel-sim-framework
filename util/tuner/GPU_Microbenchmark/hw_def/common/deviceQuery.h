@@ -62,7 +62,12 @@ unsigned intilizeDeviceProp(unsigned deviceID) {
 
   // memory
   MEM_SIZE = deviceProp.totalGlobalMem;
-  MEM_CLK_FREQUENCY = deviceProp.memoryClockRate * 1e-3f;
+  if (strcmp(deviceProp.name, "Orin") == 0)
+    MEM_CLK_FREQUENCY = 3200;
+  else if (strcmp(deviceProp.name, "Xavier") == 0)
+    MEM_CLK_FREQUENCY = 2133;
+  else
+    MEM_CLK_FREQUENCY = deviceProp.memoryClockRate * 1e-3f;
   MEM_BITWIDTH = deviceProp.memoryBusWidth;
 
   return 1;

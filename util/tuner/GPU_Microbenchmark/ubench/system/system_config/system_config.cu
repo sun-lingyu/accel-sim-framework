@@ -16,8 +16,16 @@ int main() {
 
     std::cout << "\n//Accel_Sim config: \n";
 
-    float mem_freq_MHZ = (deviceProp.memoryClockRate * 1e-3f * 2) /
-                         dram_model_freq_ratio[DRAM_MODEL];
+    float mem_freq_MHZ;
+    if (strcmp(deviceProp.name, "Orin") == 0)
+      mem_freq_MHZ = (3200 * 2) /
+                           dram_model_freq_ratio[DRAM_MODEL];
+    else if (strcmp(deviceProp.name, "Xavier") == 0)
+      mem_freq_MHZ = (2133 * 2) /
+                           dram_model_freq_ratio[DRAM_MODEL];
+    else
+      mem_freq_MHZ = (deviceProp.memoryClockRate * 1e-3f * 2) /
+                           dram_model_freq_ratio[DRAM_MODEL];
     std::cout << "-gpgpu_compute_capability_major " << deviceProp.major
               << std::endl;
     std::cout << "-gpgpu_compute_capability_minor " << deviceProp.minor

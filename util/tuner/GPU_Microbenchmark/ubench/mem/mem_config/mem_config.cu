@@ -10,8 +10,13 @@ int main() {
   snprintf(msg, sizeof(msg), "Global memory size = %.0f GB\n",
            static_cast<float>(deviceProp.totalGlobalMem / 1073741824.0f));
   std::cout << msg;
-  std::cout << "Memory Clock rate = " << deviceProp.memoryClockRate * 1e-3f
-            << " Mhz\n";
+  if (strcmp(deviceProp.name, "Orin") == 0)
+    std::cout << "Memory Clock rate = " << 3200 << " Mhz\n";
+  else if (strcmp(deviceProp.name, "Xavier") == 0)
+    std::cout << "Memory Clock rate = " << 2133 << " Mhz\n";
+  else
+    std::cout << "Memory Clock rate = " << deviceProp.memoryClockRate * 1e-3f
+              << " Mhz\n";
   std::cout << "Memory Bus Width = " << deviceProp.memoryBusWidth << " bit\n";
   std::cout << "Memory type = " << dram_model_str[DRAM_MODEL] << "\n";
   std::cout << "Memory channels = "
@@ -35,8 +40,16 @@ int main() {
               << dram_model_freq_ratio[DRAM_MODEL] << std::endl;
 
     // timing
-    float device_freq_MHZ = (deviceProp.memoryClockRate * 1e-3f * 2) /
-                            dram_model_freq_ratio[DRAM_MODEL];
+    float device_freq_MHZ;
+    if (strcmp(deviceProp.name, "Orin") == 0)
+      device_freq_MHZ = (3200 * 2) /
+                              dram_model_freq_ratio[DRAM_MODEL];
+    else if (strcmp(deviceProp.name, "Xavier") == 0)
+      device_freq_MHZ = (2133 * 2) /
+                              dram_model_freq_ratio[DRAM_MODEL];
+    else
+      device_freq_MHZ = (deviceProp.memoryClockRate * 1e-3f * 2) /
+                              dram_model_freq_ratio[DRAM_MODEL];
     if (DRAM_MODEL == dram_model::HBM) {
       // use HBM timing
       DDR_Timing timing = HBM_Timing_1000MHZ;
@@ -81,7 +94,7 @@ int main() {
                 << std::endl;
     }else if (DRAM_MODEL == dram_model::LPDDR5) {
       // use LPDDR timing
-      DDR_Timing timing = LPDDR5_Timing_3200MHZ;
+      DDR_Timing timing = LPDDR5_Timing_1600MHZ;
       timing.scale_timing_for_new_freq(device_freq_MHZ);
       std::cout << "-dram_dual_bus_interface 0" << std::endl;
       std::cout << "-gpgpu_dram_timing_opt nbk=" << timing.nbk
