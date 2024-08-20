@@ -17,7 +17,7 @@ CUOPTS =  $(GENCODE_ARCH) $(GENCODE_SM50) $(GENCODE_SM60) $(GENCODE_SM62) $(GENC
 
 CC := nvcc
 
-INCLUDE := /home/sly/misc/cuda-samples/Common/
+INCLUDE := $(CUDA_INSTALL_PATH)/samples/common/inc
 LIB :=
 
 release:
