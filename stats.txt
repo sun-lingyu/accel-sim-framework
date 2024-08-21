@@ -1,0 +1,446 @@
+running ./L1asso.csv microbenchmark
+/////////////////////////////////
+running ./L1line.csv microbenchmark
+/////////////////////////////////
+running ./MSHR100_array1073741824_shmem12288_itr6.csv microbenchmark
+/////////////////////////////////
+running ./MaxFlops_double microbenchmark
+DPU FLOP per SM = 3.999876 (flop/clk/SM)
+Total Clk number = 8388867 
+/////////////////////////////////
+running ./MaxFlops_float microbenchmark
+FLOP per SM = 127.275604 (flop/clk/SM)
+Total Clk number = 65909 
+/////////////////////////////////
+running ./MaxFlops_half microbenchmark
+half FLOP per SM = 433.519806 (flop/clk/SM)
+Total Clk number = 9675 
+/////////////////////////////////
+running ./MaxFlops_int32 microbenchmark
+int32 FLOP per SM = 127.354828 (flop/clk/SM)
+Total Clk number = 65868 
+/////////////////////////////////
+running ./atomic_add_bw microbenchmark
+Atomic int32 bandwidth = 1218.384766 (byte/clk)
+Total Clk number = 881283 
+/////////////////////////////////
+running ./atomic_add_bw_conflict microbenchmark
+Atomic int32 bandwidth = 127.851494 (byte/clk)
+Total Clk number = 524897 
+/////////////////////////////////
+running ./atomic_add_lat microbenchmark
+Atomic int32 latency = 211.505859 (clk)
+Total Clk number = 216582 
+/////////////////////////////////
+running ./config_dpu microbenchmark
+DPU FLOP per SM = 3.999879 (flop/clk/SM)
+Total Clk number = 8388862 
+double-precision DPU latency = 55.043396 (clk)
+Total Clk number = 901831 
+
+//Accel_Sim config: 
+-gpgpu_num_dp_units 4
+-ptx_opcode_latency_dp 55,55,55,55,330
+-ptx_opcode_initiation_dp 64,64,64,64,130
+-trace_opcode_latency_initiation_dp 55,64
+/////////////////////////////////
+running ./config_fpu microbenchmark
+FLOP per SM = 127.298782 (flop/clk/SM)
+Total Clk number = 65897 
+float-precision FPU latency = 4.077332 (clk)
+Total Clk number = 66803 
+
+//Accel_Sim config: 
+-gpgpu_num_sp_units 4
+-ptx_opcode_latency_fp 4,4,4,4,39
+-ptx_opcode_initiation_fp 2,2,2,2,4
+-trace_opcode_latency_initiation_sp 4,2
+/////////////////////////////////
+running ./config_int microbenchmark
+int32 FLOP per SM = 127.264023 (flop/clk/SM)
+Total Clk number = 65915 
+int32 latency = 4.213135 (clk)
+Total Clk number = 17257 
+
+//Accel_Sim config: 
+-gpgpu_num_int_units 4
+-ptx_opcode_latency_int 4,4,4,4,21
+-ptx_opcode_initiation_int 2,2,2,2,2
+-trace_opcode_latency_initiation_int 4,2
+/////////////////////////////////
+running ./config_sfu microbenchmark
+SFU fast sqrt bw = 15.9798(flops/clk/SM) 
+Total Clk number = 262476
+SFU fast sqrt latency = 23.175(clk) 
+Total Clk number = 94925
+
+//Accel_Sim config: 
+-gpgpu_num_sfu_units 4
+-ptx_opcode_latency_sfu 23
+-ptx_opcode_initiation_sfu 8
+-trace_opcode_latency_initiation_sfu 23,8
+/////////////////////////////////
+running ./config_tensor microbenchmark
+wmma PTX issue bandwidth = 7.96557(thread/clk/SM) 
+hmma SASS issue bandwidth = 15.9311(thread/clk/SM)
+FMA tensor bandwidth = 1019.59(FMA/clk/SM)
+Total Clk number = 263277
+wmma latency = 25.0312(clk)
+hmma latency = 12.5156(clk)
+Total Clk number = 102528
+
+//Accel_Sim config: 
+-gpgpu_tensor_core_avail 1
+-gpgpu_num_tensor_core_units 4
+-ptx_opcode_latency_tesnor 25
+-ptx_opcode_initiation_tensor 16
+-trace_opcode_latency_initiation_tensor 12,8
+-specialized_unit_3 1,4,12,4,4,TENSOR
+-trace_opcode_latency_initiation_spec_op_3 12,8
+/////////////////////////////////
+running ./config_udp microbenchmark
+-specialized_unit_4 1,4,4,4,4,UDP
+-trace_opcode_latency_initiation_spec_op_4 4,1
+/////////////////////////////////
+running ./core_config microbenchmark
+CUDA version number = 8.7
+
+//Accel_Sim config: 
+-gpgpu_ptx_force_max_capability 87
+-gpgpu_shader_registers 65536
+-gpgpu_registers_per_block 65536
+-gpgpu_occupancy_sm_number 87
+-gpgpu_coalesce_arch 87
+-gpgpu_pipeline_widths 4,4,4,4,4,4,4,4,4,4,8,4,4
+-gpgpu_sub_core_model 1
+-gpgpu_enable_specialized_operand_collector 0
+-gpgpu_operand_collector_num_units_gen 8
+-gpgpu_operand_collector_num_in_ports_gen 8
+-gpgpu_operand_collector_num_out_ports_gen 8
+-gpgpu_num_sched_per_core 4
+-gpgpu_max_insn_issue_per_warp 1
+-gpgpu_dual_issue_diff_exec_units 1
+-gpgpu_inst_fetch_throughput 4
+-gpgpu_shader_core_pipeline 1536:32
+-gpgpu_shader_cta 32
+/////////////////////////////////
+running ./data.csv microbenchmark
+/////////////////////////////////
+running ./deviceQuery microbenchmark
+  Device : "Orin"
+
+  CUDA version number                         : 8.7
+  GPU Max Clock rate                             : 1300 MHz 
+  Multiprocessors Count                       : 16
+  Maximum number of threads per multiprocessor: 1536
+  CUDA Cores per multiprocessor               : 128 
+  Registers per multiprocessor                : 65536
+  Shared memory per multiprocessor            : 167936 bytes
+  Warp size                                   : 32
+  Maximum number of threads per block         : 1024
+  Shared memory per block                     : 49152 bytes
+  Registers per block                         : 65536
+  globalL1CacheSupported                      : 1
+  localL1CacheSupported                       : 1
+  L2 Cache Size                             : 4 MB
+  Global memory size                        : 30 GB
+  Memory Clock rate                           : 3200 Mhz
+  Memory Bus Width                            : 256 bit
+ ////////////////////////// 
+/////////////////////////////////
+running ./kernel_lat microbenchmark
+Kernel Launch Latency = 2745.6 cycles
+The reported latency above can be slightly higher than real. For accurate evaultion using nvprof event, exmaple: make events ./kernel_lat
+
+//Accel_Sim config: 
+-gpgpu_kernel_launch_latency  2745
+/////////////////////////////////
+running ./l1_access_grain microbenchmark
+
+This benchmark measures coalescing granularity for differnet strides.
+check the nvprof or nvsight for received l1 reads and writes.
+to run the program with nsight: make nvsight ./l1_access_grain
+stats to look at: l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum & l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum
+
+/////////////////////////////////
+running ./l1_adaptive microbenchmark
+The ubench is not imepleneted yet.
+/////////////////////////////////
+running ./l1_associativity microbenchmark
+Launching L1 cache line size ubench
+Saving L1 cache line size data at L1line.csv
+Launching L1 cache assoc ubench
+Saving L1 cache assoc data at L1asso.csv
+/////////////////////////////////
+running ./l1_banks microbenchmark
+The ubench is not imepleneted yet.
+/////////////////////////////////
+running ./l1_bw_128 microbenchmark
+L1 bandwidth = 114.963(byte/clk/SM), 139.188(GB/s/SM)
+Total Clk number = 36484
+/////////////////////////////////
+running ./l1_bw_32f microbenchmark
+L1 bandwidth = 97.1939(byte/clk/SM), 117.674(GB/s/SM)
+Total Clk number = 43154
+/////////////////////////////////
+running ./l1_bw_32f_unroll microbenchmark
+L1 bandwidth = 36.830910 (byte/clk/SM)
+Total Clk number = 113880 
+/////////////////////////////////
+running ./l1_bw_64f microbenchmark
+L1 bandwidth = 13.4611(byte/clk/SM), 16.2976(GB/s/SM)
+Total Clk number = 311588
+/////////////////////////////////
+running ./l1_bw_64v microbenchmark
+L1 bandwidth = 73.8018(byte/clk/SM), 89.3533(GB/s/SM)
+Total Clk number = 28416
+/////////////////////////////////
+running ./l1_config microbenchmark
+
+//Accel_Sim config: 
+-gpgpu_adaptive_cache_config 1
+-gpgpu_shmem_option 0,8,16,32,64,164
+-gpgpu_unified_l1d_size 192
+-gpgpu_l1_banks 4
+-gpgpu_cache:dl1 S:4:128:64,L:T:m:L:L,A:384:48,16:0,32
+-gpgpu_gmem_skip_L1D 0
+-gpgpu_l1_cache_write_ratio 25
+/////////////////////////////////
+running ./l1_lat microbenchmark
+L1 Latency  =      38.0418 cycles
+Total Clk number = 1246553 
+
+//Accel_Sim config: 
+-gpgpu_l1_latency 38
+/////////////////////////////////
+running ./l1_mshr microbenchmark
+Launching L1 MSHR ubench
+Saving L1 MSHR data at MSHR100_array1073741824_shmem12288_itr6.csv
+/////////////////////////////////
+running ./l1_sector microbenchmark
+Launching L1 sector ubench
+Saving L1 sector data at data.csv
+/////////////////////////////////
+running ./l1_shared_bw microbenchmark
+Shared Memory Bandwidth = 107.436754 (byte/clk/SM)
+Total Clk number = 312318 
+/////////////////////////////////
+running ./l1_write_policy microbenchmark
+
+This microbenchmark detects L1 write policy.
+check the nvprof or nvsight for received l1 reads and writes to detect the policy.
+see the code comments for further details
+to run the program with nvsight: make nvsight ./l1_write_policy
+stats to look at: l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum & l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum & l1tex__t_sectors_pipe_lsu_mem_global_op_ld_lookup_hit.sum & l1tex__t_sectors_pipe_lsu_mem_global_op_st_lookup_hit.sum 
+
+/////////////////////////////////
+running ./l2_access_grain microbenchmark
+
+This benchmark measures l2 access granularity for differnet strides.
+check the nvprof or nvsight for received l2 reads and write.
+to run the program with nsight: make nvsight ./l2_access_grain
+stats to look at: lts__t_sectors_srcunit_tex_op_read.sum and lts__t_sectors_srcunit_tex_op_write.sum 
+
+/////////////////////////////////
+running ./l2_bw_128 microbenchmark
+L2 bandwidth = 502.643(byte/clk), 608.56(GB/s)
+Max Theortical L2 bandwidth = 512(byte/clk), 619.888(GB/s)
+L2 BW achievable = 98.1724%
+Total Clk number = 133512
+/////////////////////////////////
+running ./l2_bw_32f microbenchmark
+L2 bandwidth = 504.064(byte/clk), 610.281(GB/s)
+Max Theortical L2 bandwidth = 512(byte/clk), 619.888(GB/s)
+L2 BW achievable = 98.4501%
+Total Clk number = 266271
+/////////////////////////////////
+running ./l2_bw_64f microbenchmark
+L2 bandwidth = 214.926(byte/clk), 260.215(GB/s)
+Max Theortical L2 bandwidth = 512(byte/clk), 619.888(GB/s)
+L2 BW achievable = 41.9777%
+Total Clk number = 1248968
+/////////////////////////////////
+running ./l2_config microbenchmark
+L2 Cache Size = 4 MB
+L2 Banks number = 16
+
+//Accel_Sim config: 
+-gpgpu_n_sub_partition_per_mchannel 2
+-icnt_flit_size 40
+-gpgpu_memory_partition_indexing 2
+-gpgpu_cache:dl2 S:128:128:16,L:B:m:L:X,A:192:4,32:0,32
+/////////////////////////////////
+running ./l2_copy_engine microbenchmark
+L2 Latency no-warmp up =     186.0778 cycles 
+Total Clk number = 6097396 
+L2 Hit Latency =     185.9870 cycles 
+Total Clk number = 6094421 
+Is memcpy cached in L2? Yes, error=0.6
+
+//Accel_Sim config: 
+-gpgpu_perf_sim_memcpy 1
+/////////////////////////////////
+running ./l2_lat microbenchmark
+L2 Hit Latency =     185.9919 cycles 
+Total Clk number = 6094583 
+L1 Latency  =      38.1273 cycles
+Total Clk number = 1249355 
+
+//Accel_Sim config: 
+-gpgpu_l2_rop_latency 146
+/////////////////////////////////
+running ./l2_write_policy microbenchmark
+
+This microbenchmark detects L2 write policy.
+check the nvprof or nvsight for received L2 reads and writes to detect the policy.
+see the code comments for further details
+to run the program with nvsight: make nvsight ./2
+stats to look at: llts__t_sectors_srcunit_tex_op_read.sum & lts__t_sectors_srcunit_tex_op_write.sum & lts__t_sectors_srcunit_tex_op_read_lookup_hit.sum & lts__t_sectors_srcunit_tex_op_write_lookup_hit.sum 
+
+/////////////////////////////////
+running ./lat_double microbenchmark
+double-precision DPU latency = 55.053162 (clk)
+Total Clk number = 901991 
+/////////////////////////////////
+running ./lat_float microbenchmark
+float-precision FPU latency = 4.081360 (clk)
+Total Clk number = 66869 
+/////////////////////////////////
+running ./lat_half microbenchmark
+fpu16 latency = 8.396729 (clk)
+Total Clk number = 34393 
+/////////////////////////////////
+running ./lat_int32 microbenchmark
+int32 latency = 4.235596 (clk)
+Total Clk number = 17349 
+/////////////////////////////////
+running ./list_devices microbenchmark
+
+Device 0: "Orin sm_8.7"
+/////////////////////////////////
+running ./mem_atom_size microbenchmark
+
+This benchmark measures mem atom size granularity
+check the nvprof or nvsight for received mem reads and writes
+to run the program with nsight: make nvsight ./l2_access_grain
+stats to look at: dram__sectors_read.sum & dram__sectors_write.sum & dram__bytes_read.sum & dram__sectors_read.sum
+
+we launched 2097152 read memory reqs (1 req per thread) with a stride of 32 (128 bytes)
+if the number of memory reads is the same as read reqs, then mem atom size is 32B
+if the number of memory reads is 2X issued read reqs, then mem atom size is 64B, etc.
+
+/////////////////////////////////
+running ./mem_bw microbenchmark
+Mem BW= 148.627014 (Byte/Clk)
+Mem BW= 82.275672 (GB/sec)
+Max Theortical Mem BW= 204.800003 (GB/sec)
+Mem Efficiency = 72.571785 %
+Total Clk number = 338644 
+/////////////////////////////////
+running ./mem_config microbenchmark
+Global memory size = 30 GB
+Memory Clock rate = 3200 Mhz
+Memory Bus Width = 256 bit
+Memory type = LPDDR5
+Memory channels = 8
+
+//Accel_Sim config: 
+-gpgpu_n_mem 8
+-gpgpu_n_mem_per_ctrlr 2
+-gpgpu_dram_buswidth 2
+-gpgpu_dram_burst_length 16
+-dram_data_command_freq_ratio 4
+-dram_dual_bus_interface 0
+-gpgpu_dram_timing_opt nbk=16:CCD=4:RRD=4:RCD=15:RAS=34:RP=16:RC=30:CL=20:WL=11:CDLR=8:WR=28:nbkgrp=4:CCDL=4:RTPL=4
+/////////////////////////////////
+running ./mem_lat microbenchmark
+Mem latency =     785.7012 cycles 
+Total Clk number = 6436464 
+L2 Hit Latency =     185.9893 cycles 
+Total Clk number = 6094498 
+
+//Accel_Sim config: 
+-dram_latency 600
+/////////////////////////////////
+running ./regfile_bw microbenchmark
+wmma PTX issue bandwidth = 7.96482(thread/clk/SM) 
+hmma SASS issue bandwidth = 15.9296(thread/clk/SM)
+FMA tensor bandwidth = 1019.5(FMA/clk/SM)
+Total Clk number = 263302
+
+regfile_bw = 4096 (byte/SM)
+
+//Accel_Sim config: 
+-gpgpu_num_reg_banks 32
+-gpgpu_reg_file_port_throughput 2
+/////////////////////////////////
+running ./sfu_bw_fsqrt microbenchmark
+SFU fast sqrt bw = 15.979(flops/clk/SM) 
+Total Clk number = 262489
+/////////////////////////////////
+running ./sfu_lat_fsqrt microbenchmark
+SFU fast sqrt latency = 23.1982(clk) 
+Total Clk number = 95020
+/////////////////////////////////
+running ./shared_bw microbenchmark
+Shared Memory Bandwidth = 127.857(byte/clk/SM), 154.798(GB/s/SM)
+Total Clk number = 131219
+/////////////////////////////////
+running ./shared_bw_64 microbenchmark
+Shared Memory Bandwidth = 127.954(byte/clk/SM), 154.917(GB/s/SM)
+Total Clk number = 262238
+/////////////////////////////////
+running ./shared_lat microbenchmark
+Shared Memory Latency  = 29.018555 cycles
+Total Clk number = 59430 
+
+//Accel_Sim config: 
+-gpgpu_smem_latency 29
+/////////////////////////////////
+running ./shd_config microbenchmark
+Shared memory per multiprocessor = 167936 bytes
+Shared memory per block = 49152 bytes
+
+//Accel_Sim config: 
+-gpgpu_shmem_size 167936
+-gpgpu_shmem_sizeDefault 167936
+-gpgpu_shmem_per_block 49152
+/////////////////////////////////
+running ./system_config microbenchmark
+Device Name = Orin
+GPU Max Clock rate = 1300 MHz 
+GPU Base Clock rate = 1300 MHz 
+SM Count = 16
+CUDA version number = 8.7
+
+//Accel_Sim config: 
+-gpgpu_compute_capability_major 8
+-gpgpu_compute_capability_minor 7
+-gpgpu_n_clusters 16
+-gpgpu_n_cores_per_cluster 1
+-gpgpu_clock_domains 1300:1300:1300:1600
+/////////////////////////////////
+running ./tensor_bw_half microbenchmark
+FP16 operand, FP32 accumalte:
+wmma PTX issue bandwidth = 7.96542(thread/clk/SM) 
+hmma SASS issue bandwidth = 15.9308(thread/clk/SM)
+FMA tensor bandwidth = 1019.57(FMA/clk/SM)
+Total Clk number = 263282
+
+FP16 operand, FP16 accumalte:
+wmma PTX issue bandwidth = 7.99049(thread/clk/SM) 
+hmma SASS issue bandwidth = 15.981(thread/clk/SM)
+FMA tensor bandwidth = 1022.78(FMA/clk/SM)
+Total Clk number = 262456
+/////////////////////////////////
+running ./tensor_lat_half microbenchmark
+FP16 operand, FP32 accumalte:
+wmma latency = 25.05(clk)
+hmma latency = 12.525(clk)
+Total Clk number = 102605
+
+FP16 operand, FP16 accumalte:
+wmma latency = 25.032(clk)
+hmma latency = 12.516(clk)
+Total Clk number = 102531
+/////////////////////////////////

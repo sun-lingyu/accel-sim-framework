@@ -27,7 +27,7 @@
 // These vars are almost constant between HW generation
 // see slide 24 from Nvidia at
 // https://developer.download.nvidia.com/video/gputechconf/gtc/2020/presentations/s21730-inside-the-nvidia-ampere-architecture.pdf
-#define L2_BANKS_PER_MEM_CHANNEL 2 
+#define L2_BANKS_PER_MEM_CHANNEL 2
 #define L2_BANK_WIDTH_in_BYTE 32
 
 #endif
