@@ -212,7 +212,7 @@ For a true validation, you should attempt correlating the fully-scaled set of ap
   # Make sure PATH includes nvcc
   # If your hardware has new compute capability, ensure to add it in the /GPU_Microbenchmark/common/common.mk
   # Compile microbenchmarks
-  make -C ./util/tuner/GPU_Microbenchmark/
+  make -C ./util/tuner/GPU_Microbenchmark/ -j$(nproc)
   # Set the device id that you want to tune to
   # If you do not know the device id, run ./tuner/GPU_Microbenchmark/bin/list_devices
   export CUDA_VISIBLE_DEVICES=0
