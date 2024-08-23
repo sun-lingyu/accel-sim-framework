@@ -3,6 +3,9 @@
 ORIN:
     base_file: "$GPGPUSIM_ROOT/configs/tested-cfgs/SM87_ORIN/gpgpusim.config"
 
+xavier:
+    base_file: "$GPGPUSIM_ROOT/configs/tested-cfgs/SM72_XAVIER/gpgpusim.config"
+
 # Pascal
 TITANX:
     base_file: "$GPGPUSIM_ROOT/configs/tested-cfgs/SM6_TITANX/gpgpusim.config"

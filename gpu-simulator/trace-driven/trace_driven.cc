@@ -105,7 +105,8 @@ trace_kernel_info_t::trace_kernel_info_t(dim3 gridDim, dim3 blockDim,
       kernel_trace_info->binary_verion == AMPERE_A100_BINART_VERSION ||
       kernel_trace_info->binary_verion == AMPERE_ORIN_BINART_VERSION)
     OpcodeMap = &Ampere_OpcodeMap;
-  else if (kernel_trace_info->binary_verion == VOLTA_BINART_VERSION)
+  else if (kernel_trace_info->binary_verion == VOLTA_BINART_VERSION || 
+      kernel_trace_info->binary_verion == VOLTA_XAVIER_BINART_VERSION)
     OpcodeMap = &Volta_OpcodeMap;
   else if (kernel_trace_info->binary_verion == PASCAL_TITANX_BINART_VERSION ||
            kernel_trace_info->binary_verion == PASCAL_P100_BINART_VERSION)

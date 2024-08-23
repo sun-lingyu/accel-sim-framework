@@ -10,6 +10,7 @@
 #include "trace_opcode.h"
 
 #define VOLTA_BINART_VERSION 70
+#define VOLTA_XAVIER_BINART_VERSION 72
 
 // TO DO: moving this to a yml or def files
 
