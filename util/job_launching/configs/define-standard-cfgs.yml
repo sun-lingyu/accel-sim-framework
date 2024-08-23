@@ -119,19 +119,19 @@ BOOKSIM:
     extra_params: "-gpgpu_clock_domains 1132.0:1132.0:1132.0:850.0"
 
 LINEAR:
-    extra_params: "-memory_partition_indexing 0"
+    extra_params: "-gpgpu_memory_partition_indexing 0"
 
 XOR:
-    extra_params: "-memory_partition_indexing 1"
+    extra_params: "-gpgpu_memory_partition_indexing 1"
 
 RANDOM:
-    extra_params: "-memory_partition_indexing 4"
+    extra_params: "-gpgpu_memory_partition_indexing 4"
 
 PAE:
-    extra_params: "-memory_partition_indexing 3"
+    extra_params: "-gpgpu_memory_partition_indexing 3"
 
 IPOLY:
-    extra_params: "-memory_partition_indexing 2"
+    extra_params: "-gpgpu_memory_partition_indexing 2"
 
 VISUAL:
     extra_params: "-visualizer_enabled 1"
