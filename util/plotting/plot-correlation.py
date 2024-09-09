@@ -935,22 +935,22 @@ if options.hardware_dict == None:
             #        logger.log("For {0}: Using Date: [{1}]. Containd {2} files\n".format(csv_dir, latest_date, len(csvs)))
             kdata = []
             for csvf in csvs:
-                if "gpc__cycles_elapsed" in csvf:
-                    parse_hw_csv_2(
-                        csvf,
-                        hw_data,
-                        os.path.join(os.path.basename(root), d),
-                        kdata,
-                        logger,
-                    )
-                else:
-                    parse_hw_csv(
-                        csvf,
-                        hw_data,
-                        os.path.join(os.path.basename(root), d),
-                        kdata,
-                        logger,
-                    )
+                # if "gpc__cycles_elapsed" in csvf:
+                #     parse_hw_csv_2(
+                #         csvf,
+                #         hw_data,
+                #         os.path.join(os.path.basename(root), d),
+                #         kdata,
+                #         logger,
+                #     )
+                # else:
+                parse_hw_csv(
+                    csvf,
+                    hw_data,
+                    os.path.join(os.path.basename(root), d),
+                    kdata,
+                    logger,
+                )
 else:
     print("Begin pickle.load")
     with open(options.hardware_dict, "rb") as hw_dictionary_file:
