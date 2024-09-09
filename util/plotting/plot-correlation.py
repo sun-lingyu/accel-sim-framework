@@ -571,8 +571,7 @@ def get_sim_csv_data(filepath, logger):
 
 def parse_hw_csv_2(csv_file, hw_data, appargs, kdata, logger):
     cfg = None
-
-    with open(csv_file, "rU") as data_file:
+    with open(csv_file, "r") as data_file:
         logger.log("Parsing HW csv file {0}".format(csv_file))
         reader = csv.reader(data_file)  # define reader object
         state = "start"
@@ -606,7 +605,6 @@ def parse_hw_csv_2(csv_file, hw_data, appargs, kdata, logger):
                     kdata[kcount][metric] = []
                 kdata[kcount][metric].append(value)
                 kcount = int(row[0]) + 1
-
         logger.log("Kernels found: {0}".format(kcount))
 
     if cfg != "" and cfg != None:
@@ -622,7 +620,7 @@ def parse_hw_csv(csv_file, hw_data, appargs, kdata, logger):
     cfg = ""
     cfg_col = None
 
-    with open(csv_file, "rU") as data_file:
+    with open(csv_file, "r") as data_file:
         logger.log("Parsing HW csv file {0}".format(csv_file))
         reader = csv.reader(data_file)  # define reader object
         state = "start"
@@ -631,7 +629,8 @@ def parse_hw_csv(csv_file, hw_data, appargs, kdata, logger):
         for row in reader:
             # Begin by searching for the text line that indicates the beginning of the profile dump
             if state == "start" and len(row) > 0:
-                if "Profiling result" in row[0] or "==PROF== Disconnected" in row[0]:
+                if "Profiling result " in row[0] or "==PROF== Creating " in row[0]:
+                    print(row[0])
                     state = "header_proc"
                 continue
 
