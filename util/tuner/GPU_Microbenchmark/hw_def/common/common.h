@@ -57,7 +57,7 @@ bool isPowerOfTwo(int n) {
 static const char *dram_model_str[] = {"none", "GDDR5", "GDDR5X", "GDDR6",
                                        "HBM", "LPDDR4", "LPDDR5"};
 static const unsigned dram_model_bus_width[] = {0, 32, 32, 16, 128, 16, 16}; // in bits
-static const unsigned dram_model_mem_per_ctrlr[] = {0, 1, 1, 1, 1, 2, 2};
+static const unsigned dram_model_mem_per_ctrlr[] = {0, 1, 1, 1, 1, 2, 1};
 static const unsigned dram_model_burst_length[] = {0, 8, 8, 16, 2, 16, 16};
 static const unsigned dram_model_freq_ratio[] = {0, 4, 4, 4, 2, 2, 4};
 // atom size =

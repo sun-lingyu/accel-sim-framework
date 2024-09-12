@@ -19,7 +19,7 @@ int main() {
 
     //init cannot be larger than latency
     if(init > latency)
-      latency = init;
+      lat = init;
 
     std::cout << "\n//Accel_Sim config: \n";
     std::cout << "-gpgpu_num_dp_units " << WARP_SCHEDS_PER_SM << std::endl;
