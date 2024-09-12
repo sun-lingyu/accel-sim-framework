@@ -384,7 +384,8 @@ correl_list = [
         plotfile="l2-read-hits",
         hw_eval='np.average(hw["lts__t_sectors_srcunit_tex_op_read_lookup_hit.sum"])',
         hw_error=None,
-        sim_eval='float(sim["\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT\]\s*=\s*(.*)"])',
+        sim_eval='float(sim["\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT\]\s*=\s*(.*)"])+'
+        + 'float(sim["\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT_RESERVED\]\s*=\s*(.*)"])',
         hw_name="all",
         drophwnumbelow=0,
         plottype="log",
