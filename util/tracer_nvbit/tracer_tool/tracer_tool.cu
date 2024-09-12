@@ -361,7 +361,7 @@ void nvbit_at_cuda_event(CUcontext ctx, int is_exit, nvbit_api_cuda_t cbid,
       fclose(kernelsFile);
     }
 
-  } else if (cbid == API_CUDA_cuMemsetD8_v2){
+  } else if (cbid == API_CUDA_cuMemsetD8_v2) {
     if (!is_exit) {
       cuMemsetD8_v2_params *p = (cuMemsetD8_v2_params *)params;
       char buffer[1024];
@@ -371,7 +371,7 @@ void nvbit_at_cuda_event(CUcontext ctx, int is_exit, nvbit_api_cuda_t cbid,
       fprintf(kernelsFile, "\n");
       fclose(kernelsFile);
     }
-  } else if (cbid == API_CUDA_cuMemsetD16_v2){
+  } else if (cbid == API_CUDA_cuMemsetD16_v2) {
     if (!is_exit) {
       cuMemsetD16_v2_params *p = (cuMemsetD16_v2_params *)params;
       char buffer[1024];
@@ -381,7 +381,7 @@ void nvbit_at_cuda_event(CUcontext ctx, int is_exit, nvbit_api_cuda_t cbid,
       fprintf(kernelsFile, "\n");
       fclose(kernelsFile);
     }
-  } else if (cbid == API_CUDA_cuMemsetD32_v2){
+  } else if (cbid == API_CUDA_cuMemsetD32_v2) {
     if (!is_exit) {
       cuMemsetD32_v2_params *p = (cuMemsetD32_v2_params *)params;
       char buffer[1024];
