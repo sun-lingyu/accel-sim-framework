@@ -131,6 +131,8 @@ int main(int argc, char **argv) {
       continue;
     else if (line.substr(0, 6) == "Memcpy") {
       ofs << line << endl;
+    } else if (line.substr(0, 6) == "Memset") {
+      ofs << line << endl;
     } else if (line.substr(0, 6) == "kernel") {
       filepath = directory + "/" + line;
       group_per_block(filepath.c_str());

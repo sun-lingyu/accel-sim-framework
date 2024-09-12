@@ -256,6 +256,11 @@ std::vector<trace_command> trace_parser::parse_commandlist_file() {
       command.command_string = line;
       command.m_type = command_type::cpu_gpu_mem_copy;
       commandlist.push_back(command);
+    } else if (line.substr(0, 6) == "Memset") {
+      trace_command command;
+      command.command_string = line;
+      command.m_type = command_type::mem_set;
+      commandlist.push_back(command);
     } else if (line.substr(0, 6) == "kernel") {
       trace_command command;
       command.m_type = command_type::kernel_launch;

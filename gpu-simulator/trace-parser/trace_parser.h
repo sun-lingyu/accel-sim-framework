@@ -17,6 +17,7 @@ enum command_type {
   kernel_launch = 1,
   cpu_gpu_mem_copy,
   gpu_cpu_mem_copy,
+  mem_set,
 };
 
 enum address_space { GLOBAL_MEM = 1, SHARED_MEM, LOCAL_MEM, TEX_MEM };

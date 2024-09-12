@@ -100,6 +100,9 @@ void accel_sim_framework::parse_commandlist() {
                 << commandlist[commandlist_index].command_string << std::endl;
       m_gpgpu_sim->perf_memcpy_to_gpu(addre, Bcount);
       commandlist_index++;
+    } else if (commandlist[commandlist_index].m_type == command_type::mem_set){
+      commandlist_index++;
+      // do nothing
     } else if (commandlist[commandlist_index].m_type == command_type::kernel_launch) {
       // Read trace header info for window_size number of kernels
       kernel_trace_t *kernel_trace_info =
@@ -114,6 +117,26 @@ void accel_sim_framework::parse_commandlist() {
       // unsupported commands will fail the simulation
       assert(0 && "Undefined Command");
     }
+  }
+
+  // peek memcpy in next pass
+  unsigned commandlist_index_copy = commandlist_index;
+  unsigned kernels_count = 0;
+  std::vector<std::pair<size_t, size_t>> memcpy_addrs;
+  while (kernels_count < window_size && commandlist_index_copy < commandlist.size()) {
+    if (commandlist[commandlist_index_copy].m_type == command_type::cpu_gpu_mem_copy
+        || commandlist[commandlist_index_copy].m_type == command_type::mem_set) {
+      size_t addre, Bcount;
+      tracer.parse_memcpy_info(commandlist[commandlist_index_copy].command_string, addre, Bcount);
+      memcpy_addrs.push_back({addre, Bcount});
+      commandlist_index_copy++;
+    } else if (commandlist[commandlist_index_copy].m_type == command_type::kernel_launch) {
+      kernels_count++;
+      commandlist_index_copy++;
+    } else {
+      assert(0 && "Undefined Command");
+    }
+    m_gpgpu_sim->memcpy_addrs = memcpy_addrs;
   }
 }
 
