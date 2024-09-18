@@ -224,6 +224,8 @@ for bench in benchmarks:
                     + "lts__t_sectors_srcunit_tex_op_write.sum,lts__t_sectors_srcunit_tex_op_read_lookup_hit.sum,lts__t_sectors_srcunit_tex_op_write_lookup_hit.sum,"
                     + "lts__t_sector_op_write_hit_rate.pct,lts__t_sectors_srcunit_tex_op_read.sum.per_second,dram__sectors_read.sum,dram__sectors_write.sum,dram__bytes_read.sum,"
                     + ",lts__t_sectors_srcunit_tex_op_read_lookup_miss.sum,lts__t_sectors_srcunit_tex_op_write_lookup_miss.sum,"
+                    + ",l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum,l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum,"
+                    + "lts__t_sectors_srcunit_tex_op_read.sum.per_second,lts__t_sector_op_read_hit_rate.pct"
                     + " --csv --page raw --target-processes all --cache-control none --replay-mode application "
                     + kernel_number
                     + " "
