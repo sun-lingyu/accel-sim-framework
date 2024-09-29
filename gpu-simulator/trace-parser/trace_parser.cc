@@ -70,6 +70,9 @@ unsigned inst_trace_t::get_datawidth_from_opcode(
     const std::vector<std::string> &opcode) const {
   for (unsigned i = 0; i < opcode.size(); ++i) {
     if (is_number(opcode[i])) {
+      if (opcode[0] == "LDSM"){
+        return 16; // LDSM instruction loads data in 16B/128b, although is looks like "LDSM.16.M88.x". 
+      }
       return (std::stoi(opcode[i], NULL) / 8);
     } else if (opcode[i][0] == 'U' && is_number(opcode[i].substr(1))) {
       // handle the U* case

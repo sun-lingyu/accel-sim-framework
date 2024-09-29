@@ -319,6 +319,7 @@ bool trace_warp_inst_t::parse_from_trace_struct(
       break;
     case OP_LDSM:
       assert(data_size > 0);
+      memory_op = memory_load;
       space.set_type(shared_space);
       break;
     case OP_ST:
