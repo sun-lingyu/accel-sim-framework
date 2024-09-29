@@ -263,7 +263,8 @@ correl_list = [
         plotfile="l2-read-hitrate",
         hw_eval='np.average(hw["l2_tex_read_hit_rate"])',
         hw_error=None,
-        sim_eval='100*float(sim["\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT\]\s*=\s*(.*)"])/'
+        sim_eval='100*(float(sim["\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT\]\s*=\s*(.*)"])'
+        + 'float(sim["\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT_RESERVED\]\s*=\s*(.*)"]))/'
         + 'float(sim["\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[TOTAL_ACCESS\]\s*=\s*(.*)"])',
         hw_name="all",
         drophwnumbelow=0,
