@@ -17,6 +17,6 @@ petrv2_trace:
         - petrv2_decoder_trace:
             - args:
               accel-sim-mem: 1G
-        - petrv2_decoder_xavier_trace:
-            - args:
-              accel-sim-mem: 1G
+        # - petrv2_decoder_xavier_trace:
+        #     - args:
+        #       accel-sim-mem: 1G
