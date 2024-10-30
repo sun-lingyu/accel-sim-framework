@@ -85,6 +85,19 @@ unsigned inst_trace_t::get_datawidth_from_opcode(
   return 4;  // default is 4 bytes
 }
 
+unsigned inst_trace_t::get_l2_prefetchsize_from_opcode(
+    const std::vector<std::string> &opcode) const {
+  for (unsigned i = 0; i < opcode.size(); ++i) {
+    if (opcode[i].substr(0, 3) == "LTC") {
+      unsigned bytes;
+      sscanf(opcode[i].c_str(), "LTC%uB", &bytes);
+      return bytes;
+    }
+  }
+
+  return 0;  // default is 0 (not enabled)
+}
+
 kernel_trace_t::kernel_trace_t() {
   kernel_name = "Empty";
   shmem_base_addr = 0;
@@ -189,6 +202,7 @@ bool inst_trace_t::parse_from_string(std::string trace, unsigned trace_version,
     // read the memory width from the opcode, as nvbit can report it incorrectly
     std::vector<std::string> opcode_tokens = get_opcode_tokens();
     memadd_info->width = get_datawidth_from_opcode(opcode_tokens);
+    memadd_info->l2_prefetch_size = get_l2_prefetchsize_from_opcode(opcode_tokens);
 
     ss >> std::dec >> address_mode;
     if (address_mode == address_format::list_all) {

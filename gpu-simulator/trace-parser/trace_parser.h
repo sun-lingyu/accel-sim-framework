@@ -38,6 +38,7 @@ struct trace_command {
 struct inst_memadd_info_t {
   uint64_t addrs[WARP_SIZE];
   int32_t width;
+  int32_t l2_prefetch_size;
 
   void base_stride_decompress(unsigned long long base_address, int stride,
                               const std::bitset<WARP_SIZE> &mask);
@@ -72,6 +73,9 @@ struct inst_trace_t {
       const std::vector<std::string> &opcode) const;
 
   std::vector<std::string> get_opcode_tokens() const;
+
+  unsigned get_l2_prefetchsize_from_opcode(
+      const std::vector<std::string> &opcode) const;
 
   ~inst_trace_t();
 };

@@ -247,6 +247,7 @@ bool trace_warp_inst_t::parse_from_trace_struct(
   // fill addresses
   if (trace.memadd_info != NULL) {
     data_size = trace.memadd_info->width;
+    l2_prefetch_size = trace.memadd_info->l2_prefetch_size;
     for (unsigned i = 0; i < warp_size(); ++i)
       set_addr(i, trace.memadd_info->addrs[i]);
   }
@@ -276,8 +277,9 @@ bool trace_warp_inst_t::parse_from_trace_struct(
       // Add for LDGSTS instruction
       if (m_opcode == OP_LDGSTS) m_is_ldgsts = true;
       // check the cache scope, if its strong GPU, then bypass L1
-      if (trace.check_opcode_contain(opcode_tokens, "STRONG") &&
-          trace.check_opcode_contain(opcode_tokens, "GPU")) {
+      if ((trace.check_opcode_contain(opcode_tokens, "STRONG") &&
+          trace.check_opcode_contain(opcode_tokens, "GPU")) ||
+          trace.check_opcode_contain(opcode_tokens, "BYPASS")) {
         cache_op = CACHE_GLOBAL;
       }
       break;
