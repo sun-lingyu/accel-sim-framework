@@ -14,6 +14,7 @@ config_maps = {
     "RTX3070": set("GeForce RTX 3070"),
     "XAVIER" : set("Jetson AGX XAVIER"),
     "ORIN" : set("Jetson AGX Orin"),
+    "NX" : set("Jetson AGX Orin NX"),
 }
 
 

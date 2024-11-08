@@ -10,6 +10,10 @@ int main() {
   snprintf(msg, sizeof(msg), "Global memory size = %.0f GB\n",
            static_cast<float>(deviceProp.totalGlobalMem / 1073741824.0f));
   std::cout << msg;
+  if (strcmp(deviceProp.name, "Orin") == 0 && deviceProp.memoryClockRate == 918000)
+  {
+    deviceProp.memoryBusWidth = 128;
+  }
   if (strcmp(deviceProp.name, "Orin") == 0)
     std::cout << "Memory Clock rate = " << 3200 << " Mhz\n";
   else if (strcmp(deviceProp.name, "Xavier") == 0)
@@ -26,10 +30,18 @@ int main() {
 
     std::cout << "\n//Accel_Sim config: \n";
 
-    std::cout << "-gpgpu_n_mem "
-              << get_num_channels(deviceProp.memoryBusWidth, DRAM_MODEL)
+    if (strcmp(deviceProp.name, "Orin") == 0 && deviceProp.memoryClockRate == 918000)
+    {
+      std::cout << "-gpgpu_n_mem "
+              << get_num_channels(128, DRAM_MODEL)
               << std::endl;
-
+    }
+    else
+    {
+      std::cout << "-gpgpu_n_mem "
+                << get_num_channels(deviceProp.memoryBusWidth, DRAM_MODEL)
+                << std::endl;
+    }
     std::cout << "-gpgpu_n_mem_per_ctrlr "
               << dram_model_mem_per_ctrlr[DRAM_MODEL] << std::endl;
     std::cout << "-gpgpu_dram_buswidth " << dram_model_bus_width[DRAM_MODEL] / 8

@@ -35,8 +35,16 @@ int main() {
     printf("L2 Cache Size = %.0f MB\n",
            static_cast<float>(deviceProp.l2CacheSize / 1048576.0f));
   }
-
-  unsigned mem_channel = get_num_channels(MEM_BITWIDTH, DRAM_MODEL);
+  unsigned mem_channel;
+  if (strcmp(deviceProp.name, "Orin") == 0 && deviceProp.memoryClockRate == 918000)
+  {
+    mem_channel = get_num_channels(128, DRAM_MODEL);
+  }
+  else
+  {
+    mem_channel = get_num_channels(MEM_BITWIDTH, DRAM_MODEL);
+  }
+  
   unsigned l2_banks_num = mem_channel * L2_BANKS_PER_MEM_CHANNEL;
 
   std::cout << "L2 Banks number = " << l2_banks_num << std::endl;
