@@ -67,8 +67,8 @@ void accel_sim_framework::simulation_loop() {
 
     unsigned finished_kernel_uid = simulate();
     // cleanup finished kernel
-    if (finished_kernel_uid || m_gpgpu_sim->cycle_insn_cta_max_hit() ||
-        !m_gpgpu_sim->active()) {
+    if ((finished_kernel_uid || m_gpgpu_sim->cycle_insn_cta_max_hit() ||
+        !m_gpgpu_sim->active()) && !kernels_info.empty()) {
       cleanup(finished_kernel_uid);
     }
 
