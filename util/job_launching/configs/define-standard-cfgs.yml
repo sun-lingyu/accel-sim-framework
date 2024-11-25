@@ -163,6 +163,18 @@ FRFCFS:
 FCFS:
     extra_params: "-gpgpu_dram_scheduler 0"
 
+ORIN_QUATER_L2:
+    extra_params: "-gpgpu_cache:dl2 S:32:128:16,L:B:m:L:P,A:192:32,32:0,32"
+
+ORIN_HALF_L2:
+    extra_params: "-gpgpu_cache:dl2 S:64:128:16,L:B:m:L:P,A:192:32,32:0,32"
+
+ORIN_DOUBLE_L2:
+    extra_params: "-gpgpu_n_sub_partition_per_mchannel 2"
+
+ORIN_NCU:
+    extra_params: "-gpgpu_perf_sim_memcpy 0 -gpgpu_memcpy_keep_l2 1 -gpgpu_invalidate_l2_cache 1"
+
 # Experimental - for SM 60 PTXplus support
 PTXPLUS_SM6:
     extra_params: "-gpgpu_ptx_convert_to_ptxplus 1 -gpgpu_ptx_force_max_capability 62 -gpgpu_ptx_force_min_capability 60"
