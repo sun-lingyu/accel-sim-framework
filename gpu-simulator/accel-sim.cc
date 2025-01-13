@@ -185,6 +185,9 @@ unsigned accel_sim_framework::simulate() {
     active = m_gpgpu_sim->active();
     finished_kernel_uid = m_gpgpu_sim->finished_kernel();
   } while (active && !finished_kernel_uid);
+  
+  m_gpgpu_sim->l2_flush_cycle();
+  
   return finished_kernel_uid;
 }
 
